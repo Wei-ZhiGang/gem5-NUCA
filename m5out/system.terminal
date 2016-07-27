@@ -1,0 +1,31 @@
+Booting Linux on physical CPU 0x0
+Initializing cgroup subsys cpuset
+Linux version 3.14.0 (sim@openstack1) (gcc version 4.8.4 (Ubuntu/Linaro 4.8.4-2ubuntu1~14.04.1) ) #1 SMP PREEMPT Sun May 15 16:33:56 CST 2016
+Kernel was built at commit id 'b2af788'
+CPU: ARMv7 Processor [410fc0f0] revision 0 (ARMv7), cr=10c53c7d
+CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+Machine model: V2P-CA15
+bootconsole [earlycon0] enabled
+Memory policy: Data cache writealloc
+kdebugv2m: Following are test values to confirm proper working
+kdebugv2m: Ranges 42000000 0 
+kdebugv2m: Regs 30000000 1000000 
+kdebugv2m: Virtual-Reg f0000000 
+kdebugv2m: pci node addr_cells 3 
+kdebugv2m: pci node size_cells 2 
+kdebugv2m: motherboard addr_cells 2 
+On node 0 totalpages: 131072
+free_area_init_node: node 0, pgdat 80679840, node_mem_map 9fbf9000
+  Normal zone: 1024 pages used for memmap
+  Normal zone: 0 pages reserved
+  Normal zone: 131072 pages, LIFO batch:31
+sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956969942ns
+PERCPU: Embedded 8 pages/cpu @9fbe1000 s12224 r8192 d12352 u32768
+pcpu-alloc: s12224 r8192 d12352 u32768 alloc=8*4096
+pcpu-alloc: [0] 0 [0] 1 
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 130048
+Kernel command line: earlyprintk=pl011,0x1c090000 console=ttyAMA0 lpj=19988480 norandmaps rw loglevel=8 mem=512MB root=/dev/sda1
+PID hash table entries: 2048 (order: 1, 8192 bytes)
+Dentry cache hash table entries: 65536 (order: 6, 262144 bytes)
+Inode-cache hash table entries: 32768 (order: 5, 131072 bytes)
+

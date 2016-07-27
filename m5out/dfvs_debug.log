@@ -1,0 +1,24 @@
+412829852000: system.realview.energy_ctrl: dvfs handler enabled
+412829862000: system.realview.energy_ctrl: reading number of domains 1
+412829906000: system.realview.energy_ctrl: writing domain id index:0
+412829908000: system.realview.energy_ctrl: reading domain id at index 0 as 0
+412829976000: system.realview.energy_ctrl: writing domain id:0
+412829978000: system.realview.energy_ctrl: reading domain id:0
+412829984000: system.realview.energy_ctrl: reading num of perf level:3
+412830417000: system.realview.energy_ctrl: writing perf level to read opp at: 0
+412830419000: system.realview.energy_ctrl: reading freq 1000000 KHz at perf level: 0
+412830426000: system.realview.energy_ctrl: reading voltage 1000000 u-volt at perf level: 0
+412830445000: system.realview.energy_ctrl: writing perf level to read opp at: 1
+412830447000: system.realview.energy_ctrl: reading freq 750187 KHz at perf level: 1
+412830454000: system.dvfs_handler: DVFS: Request for perf-level 1 for single-point voltage domain system.cpu_voltage_domain.  Returning voltage at level 0: 1.00 V
+412830454000: system.realview.energy_ctrl: reading voltage 1000000 u-volt at perf level: 1
+412830473000: system.realview.energy_ctrl: writing perf level to read opp at: 2
+412830475000: system.realview.energy_ctrl: reading freq 500000 KHz at perf level: 2
+412830482000: system.dvfs_handler: DVFS: Request for perf-level 2 for single-point voltage domain system.cpu_voltage_domain.  Returning voltage at level 0: 1.00 V
+412830482000: system.realview.energy_ctrl: reading voltage 1000000 u-volt at perf level: 2
+412852862000: system.realview.energy_ctrl: reading dvfs handler trans latency 100000 ns
+412853040000: system.realview.energy_ctrl: writing domain id:0
+412853042000: system.realview.energy_ctrl: reading domain 0 perf level: 0
+412860393000: system.realview.energy_ctrl: writing domain id:0
+412860395000: system.realview.energy_ctrl: reading domain 0 perf level: 0
+1009306376000: system.terminal: attach terminal 0
