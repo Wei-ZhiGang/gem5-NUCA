@@ -44,7 +44,8 @@ class Mesh_l2(SimpleTopology):
 
         num_routers = options.num_l2caches + options.num_cpus
         num_rows = options.mesh_rows
-        print options
+
+#        print options
 
         # There must be an evenly divisible number of cntrls to routers
         # Also, obviously the number or rows must be <= the number of routers
@@ -80,14 +81,6 @@ class Mesh_l2(SimpleTopology):
                                     int_node=routers[router_id]))
             link_count += 1
 
-        #test print
-        #print remainder_nodes
-        #print "..."
-        #print nodes
-        #print "..."
-        #print network_nodes
-        #print "Over....................."
-
         # Connect the remainding nodes to router 0.  These should only be
         # DMA nodes.
         for (i, node) in enumerate(remainder_nodes):
@@ -110,8 +103,8 @@ class Mesh_l2(SimpleTopology):
         for row in xrange(num_rows):
             for col in xrange(num_columns):
                 if (col + 1 < num_columns):
-                    east_id = col + (row * num_columns)
-                    west_id = (col + 1) + (row * num_columns)
+                    east_id = row +(col * num_rows) 
+                    west_id = row + ((col + 1) * num_rows) 
                     int_links.append(IntLink(link_id=link_count,
                                             node_a=routers[east_id],
                                             node_b=routers[west_id],
@@ -121,8 +114,8 @@ class Mesh_l2(SimpleTopology):
         for col in xrange(num_columns):
             for row in xrange(num_rows):
                 if (row + 1 < num_rows):
-                    north_id = col + (row * num_columns)
-                    south_id = col + ((row + 1) * num_columns)
+                    north_id = row + (col * num_rows)  
+                    south_id = (row + 1) + (col * num_rows) 
                     int_links.append(IntLink(link_id=link_count,
                                             node_a=routers[north_id],
                                             node_b=routers[south_id],
@@ -130,3 +123,7 @@ class Mesh_l2(SimpleTopology):
                     link_count += 1
 
         network.int_links = int_links
+        #for i,node in enumerate(network.ext_links):
+        #    print i,"--",node.ext_node,"-",node.int_node
+        #for i,node in enumerate(network.int_links):
+        #    print i,"--",node.node_a,"-",node.node_b,"-",node.weight,"-",node.link_id
