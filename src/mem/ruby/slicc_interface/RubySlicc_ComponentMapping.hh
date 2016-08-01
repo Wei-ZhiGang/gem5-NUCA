@@ -78,6 +78,26 @@ mapAddressToRange(const Address & addr, MachineType type, int low_bit,
     return mach;
 }
 
+// A multicast search function.
+inline NetDest
+multicast(MachineID machID, MachineType typeL1, MachineType typeL2)
+{
+    NetDest dest;
+    for(NodeID i = 0; i < MachineType_base_count(typeL2); i++) {
+        MachineID mach = {typeL2, i}
+        if (machID.num == mach.num % MachineType_base_count(typeL1))
+            dest.add(mach);
+    }
+    return dest;
+}
+
+// Count the number of banks in a bankset.
+inline int
+countSetbanks(MachineType typeL1, MachineType typeL2)
+{
+    return MachineType_base_count(typeL2) / MachineType_base_count(typeL1);
+}
+
 inline NodeID
 machineIDToNodeID(MachineID machID)
 {

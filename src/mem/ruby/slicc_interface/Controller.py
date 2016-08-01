@@ -49,3 +49,8 @@ class RubyController(MemObject):
 
     memory = MasterPort("Port for attaching a memory controller")
     system = Param.System(Parent.any, "system object parameter")
+
+    # Wei added for init L1 access metrix
+    number_of_L2sets = Param.Int("Number of L2 Cache sets")
+    number_of_banks_aset = Param.Int("Number of banks in one bankset")
+    number_of_cpus = Param.Int("Number of cpus")

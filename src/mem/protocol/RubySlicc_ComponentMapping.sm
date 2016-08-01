@@ -40,3 +40,5 @@ NodeID machineIDToNodeID(MachineID machID);
 NodeID machineIDToVersion(MachineID machID);
 MachineType machineIDToMachineType(MachineID machID);
 MachineID createMachineID(MachineType t, NodeID i);
+NetDest multicast(MachineID machID, MachineType typeL1, MachineType typeL2);
+int countSetbanks(MachineType typeL1, MachineType typeL2);

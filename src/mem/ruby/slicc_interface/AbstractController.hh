@@ -148,6 +148,12 @@ class AbstractController : public MemObject, public Consumer
     unsigned int m_in_ports;
     unsigned int m_cur_in_port;
     int m_number_of_TBEs;
+
+    // Wei added.
+    int m_number_of_L2sets;
+    int m_number_of_banks_aset;
+    int m_number_of_cpus;
+
     int m_transitions_per_cycle;
     unsigned int m_buffer_size;
     Cycles m_recycle_latency;

@@ -1,0 +1,7 @@
+protocol "MOESI_NUCA";
+include "RubySlicc_interfaces.slicc";
+include "MOESI_NUCA-msg.sm";
+include "MOESI_NUCA-L1cache.sm";
+include "MOESI_NUCA-L2cache.sm";
+include "MOESI_NUCA-dma.sm";
+include "MOESI_NUCA-dir.sm";
