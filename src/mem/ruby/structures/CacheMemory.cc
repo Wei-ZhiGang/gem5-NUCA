@@ -64,6 +64,7 @@ CacheMemory::CacheMemory(const Params *p)
     m_is_instruction_only_cache = p->is_icache;
     m_resource_stalls = p->resourceStalls;
     printf("m_cache_size = %ld",p->size);	//for test
+	printf("dataArrayBanks:%d,tagArrayBanks:%d,start_index_bit:%d.\n",p->dataArrayBanks,p->tagArrayBanks,p->start_index_bit);
 }
 
 void
