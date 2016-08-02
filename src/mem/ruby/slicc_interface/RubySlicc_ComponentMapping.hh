@@ -98,6 +98,15 @@ countSetbanks(MachineType typeL1, MachineType typeL2)
     return MachineType_base_count(typeL2) / MachineType_base_count(typeL1);
 }
 
+// Map to nearest L2 Cache. Input L1 machID and L2 type.
+inline MachineID
+maptonearestbank(MachineID machID, MachineType type)
+{
+    MachineType mach;
+    mach = {type, machID.num};
+    return mach;
+}
+
 inline NodeID
 machineIDToNodeID(MachineID machID)
 {

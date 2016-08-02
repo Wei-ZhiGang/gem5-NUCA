@@ -140,6 +140,7 @@ machine(L2Cache, "Token protocol")
     L1_GETS,             desc="local L1 GETS request";
     L1_GETS_N,             desc="local L1 GETS_N request";
     L1_GETX,             desc="local L1 GETX request";
+    L1_GETX_M,             desc="Multicast L1 GETX request";
     L1_PUTO,             desc="local owner wants to writeback";
     L1_PUTX,             desc="local exclusive wants to writeback";
     L1_PUTS_only,             desc="only local sharer wants to writeback";
@@ -2068,7 +2069,7 @@ machine(L2Cache, "Token protocol")
     o_popL1RequestQueue;
   }
 
-  transition({NP, I}, L1_GETS, IGS) {
+  transition({NP, I}, L1_GETS) {
     //i_allocateTBE;
     s_recordGetSL1ID;
     //a_issueGETS;
@@ -2817,5 +2818,10 @@ machine(L2Cache, "Token protocol")
     f_sendUnblock;
     s_deallocateTBE;
     m_popRequestQueue;
+  }
+
+  // Multicast response for UNBLOCK_EXCLUSIVE from L1.
+  transition({NP,I}, Exclusive_Unblock) {
+    n_popResponseQueue;
   }
 }

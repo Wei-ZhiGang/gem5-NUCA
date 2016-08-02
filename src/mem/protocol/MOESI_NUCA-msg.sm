@@ -35,6 +35,7 @@
 // CoherenceRequestType
 enumeration(CoherenceRequestType, desc="...") {
   GETX,      desc="Get eXclusive";
+  GETX_M,      desc="Get eXclusive with multicast";
   GETS,      desc="Get Shared";
   GETS_N,     desc="Get Shared Failed";
   PUTX,      desc="Put eXclusive";
