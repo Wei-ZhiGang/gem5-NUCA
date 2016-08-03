@@ -613,6 +613,9 @@ machine(L2Cache, "Token protocol")
         if (in_msg.Type == CoherenceRequestType:GETX) {
           trigger(Event:L1_GETX, in_msg.Addr,
                   getCacheEntry(in_msg.Addr), TBEs[in_msg.Addr]);
+        } else if (in_msg.Type == CoherenceRequestType:GETX_M) {
+          trigger(Event:L1_GETX_M, in_msg.Addr,
+                  getCacheEntry(in_msg.Addr), TBEs[in_msg.Addr]);
         } else if (in_msg.Type == CoherenceRequestType:GETS) {
             trigger(Event:L1_GETS, in_msg.Addr,
                   getCacheEntry(in_msg.Addr), TBEs[in_msg.Addr]);
@@ -1026,6 +1029,19 @@ machine(L2Cache, "Token protocol")
   }
 
   action(e_sendAckToL1RequestorFromTBE, "eee", desc="Send ack with the tokens we've collected thus far.") {
+    enqueue(responseNetwork_out, ResponseMsg, response_latency) {
+      assert(is_valid(tbe));
+      out_msg.Addr := address;
+      out_msg.Type := CoherenceResponseType:ACK;
+      out_msg.Sender := machineID;
+      out_msg.SenderMachine := MachineType:L2Cache;
+      out_msg.Destination.add(tbe.L1_GetX_ID);
+      out_msg.Acks := 0 - 1;
+      out_msg.MessageSize := MessageSizeType:Response_Control;
+    }
+  }
+
+  action(e_sendNackToL1RequestorFromTBE, "eee", desc="Send nack with the tokens we've collected thus far.") {
     enqueue(responseNetwork_out, ResponseMsg, response_latency) {
       assert(is_valid(tbe));
       out_msg.Addr := address;
@@ -1573,7 +1589,7 @@ machine(L2Cache, "Token protocol")
     zz_recycleL1RequestQueue;
   }
 
-  transition({II, IFGX, IFGS, ISFGS, IFGXX, IFLXO, OFGX, ILOW, ILOXW, ILOSW, ILOSXW, SLSW, OLSW, ILSW, IW, OW, SW, OXW, OLSXW, ILXW, IFLS, IFLO, IFLOX, IFLOXX, IFLOSX, OLSXS, IGS, IGM, IGMLS, IGMO, IGMIO, OGMIO, IGMIOF, OGMIOF, MM, SS, OO, OI, MI, MII, OLSI, ILSI, SLSS, OLSS, OLSF, IGMIOFS, ILOSD, ILOSXD, ILOD, ILXD, ILOXD}, {L1_GETX, L1_GETS}) {
+  transition({II, IFGX, IFGS, ISFGS, IFGXX, IFLXO, OFGX, ILOW, ILOXW, ILOSW, ILOSXW, SLSW, OLSW, ILSW, IW, OW, SW, OXW, OLSXW, ILXW, IFLS, IFLO, IFLOX, IFLOXX, IFLOSX, OLSXS, IGS, IGM, IGMLS, IGMO, IGMIO, OGMIO, IGMIOF, OGMIOF, MM, SS, OO, OI, MI, MII, OLSI, ILSI, SLSS, OLSS, OLSF, IGMIOFS, ILOSD, ILOSXD, ILOD, ILXD, ILOXD}, {L1_GETX, L1_GETX_M, L1_GETS, L1_GETS_N}) {
     zz_recycleL1RequestQueue;
   }
 
@@ -2063,7 +2079,7 @@ machine(L2Cache, "Token protocol")
   }
 
   // LOCAL REQUESTS THAT MUST ISSUE
-
+  // Wei modified. ------------------
   transition(NP, {L1_PUTS, L1_PUTX, L1_PUTO}) {
     ll_writebackNack;
     o_popL1RequestQueue;
@@ -2093,6 +2109,22 @@ machine(L2Cache, "Token protocol")
     uu_profileMiss;
     o_popL1RequestQueue;
   }
+  
+  // Wei added. --------------------
+  transition({NP, I}, L1_GETX_M) {
+    s_recordGetXL1ID;
+    e_sendNackToL1RequestorFromTBE;
+    //uu_profileMiss;
+    o_popL1RequestQueue;
+  }
+
+  transition({ILS, ILOS, OLS, ILO, SLS, S, O, M, OLSX, ILX, ILOX, ILOSX}, L1_GETX_M) {
+    s_recordGetXL1ID;
+    e_sendAckToL1RequestorFromTBE;
+    //uu_profileMiss;
+    o_popL1RequestQueue;
+  }
+  // -------------------------------
 
   transition(S, L1_GETX, IGM) {
     i_allocateTBE;
@@ -2820,7 +2852,7 @@ machine(L2Cache, "Token protocol")
     m_popRequestQueue;
   }
 
-  // Multicast response for UNBLOCK_EXCLUSIVE from L1.
+  // Wei added. Multicast response for UNBLOCK_EXCLUSIVE from L1.
   transition({NP,I}, Exclusive_Unblock) {
     n_popResponseQueue;
   }

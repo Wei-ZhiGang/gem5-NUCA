@@ -74,7 +74,9 @@ machine(L1Cache, "Directory protocol")
     II, AccessPermission:Busy, "II", desc="Issued PutX/O, saw Fwd_GETS or Fwd_GETX, waiting for ack";
 
     IS_N, AccessPermission:Busy, "IS_N", desc="Issued GETS_N, waiting for data";
-    IM_N, AccessPermission:Busy, "IM_N", desc="Issued GETX_N, waiting for data";
+    IM_M, AccessPermission:Busy, "IM_M", desc="Issued GETX_M, waiting for ack";
+    SM_M, AccessPermission:Busy, "SM_M", desc="Issued GETX_M, waiting for ack";
+    OM_M, AccessPermission:Busy, "OM_M", desc="Issued GETX_M, waiting for ack";
   }
 
   // EVENTS
@@ -477,14 +479,47 @@ machine(L1Cache, "Directory protocol")
   }
 
   action(b_issueGETX, "b", desc="Issue GETX") {
-    peek(mandatoryQueue_in, RubyRequest) {
+    peek(responseToL1Cache_in, ResponseMsg) {
       enqueue(requestNetwork_out, RequestMsg, request_latency) {
         out_msg.Addr := address;
         out_msg.Type := CoherenceRequestType:GETX;
         out_msg.Requestor := machineID;
         out_msg.RequestorMachine := MachineType:L1Cache;
-        out_msg.Destination.add(mapAddressToRange(address, MachineType:L2Cache,
-              l2_select_low_bit, l2_select_num_bits, intToID(0)));
+        out_msg.Destination.add(maptonearestbank(machineID, MachineType:L2Cache));
+        out_msg.MessageSize := MessageSizeType:Request_Control;
+        out_msg.AccessMode := in_msg.AccessMode;
+        out_msg.Prefetch := in_msg.Prefetch;
+      }
+    }
+  }
+
+  action(b_issueGETXM, "bm", desc="Issue GETX_M") {
+    peek(mandatoryQueue_in, RubyRequest) {
+      assert(is_valid(tbe));
+      tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
+      tbe.AccessMode := in_msg.AccessMode;
+      tbe.Prefetch := in_msg.Prefetch;
+      enqueue(requestNetwork_out, RequestMsg, request_latency) {
+        out_msg.Addr := address;
+        out_msg.Type := CoherenceRequestType:GETX_M;
+        out_msg.Requestor := machineID;
+        out_msg.RequestorMachine := MachineType:L1Cache;
+        out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+        out_msg.MessageSize := MessageSizeType:Request_Control;
+        out_msg.AccessMode := in_msg.AccessMode;
+        out_msg.Prefetch := in_msg.Prefetch;
+      }
+    }
+  }
+
+  action(b_issueGETXtoAcksender, "b", desc="Issue GETX to Ack sender") {
+    peek(responseToL1Cache_in, ResponseMsg) {
+      enqueue(requestNetwork_out, RequestMsg, request_latency) {
+        out_msg.Addr := address;
+        out_msg.Type := CoherenceRequestType:GETX;
+        out_msg.Requestor := machineID;
+        out_msg.RequestorMachine := MachineType:L1Cache;
+        out_msg.Destination.add(in_msg.Sender);
         out_msg.MessageSize := MessageSizeType:Request_Control;
         out_msg.AccessMode := in_msg.AccessMode;
         out_msg.Prefetch := in_msg.Prefetch;
@@ -493,37 +528,40 @@ machine(L1Cache, "Directory protocol")
   }
 
   action(d_issuePUTX, "d", desc="Issue PUTX") {
+    assert(is_valid(tbe));
+    tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
     enqueue(requestNetwork_out, RequestMsg, request_latency) {
       out_msg.Addr := address;
       out_msg.Type := CoherenceRequestType:PUTX;
       out_msg.Requestor := machineID;
       out_msg.RequestorMachine := MachineType:L1Cache;
-      out_msg.Destination.add(mapAddressToRange(address, MachineType:L2Cache,
-              l2_select_low_bit, l2_select_num_bits, intToID(0)));
+      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Writeback_Control;
     }
   }
 
   action(dd_issuePUTO, "\d", desc="Issue PUTO") {
+    assert(is_valid(tbe));
+    tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
     enqueue(requestNetwork_out, RequestMsg, request_latency) {
       out_msg.Addr := address;
       out_msg.Type := CoherenceRequestType:PUTO;
       out_msg.Requestor := machineID;
       out_msg.RequestorMachine := MachineType:L1Cache;
-      out_msg.Destination.add(mapAddressToRange(address, MachineType:L2Cache,
-              l2_select_low_bit, l2_select_num_bits, intToID(0)));
+      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Writeback_Control;
     }
   }
 
   action(dd_issuePUTS, "\ds", desc="Issue PUTS") {
+    assert(is_valid(tbe));
+    tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
     enqueue(requestNetwork_out, RequestMsg, request_latency) {
       out_msg.Addr := address;
       out_msg.Type := CoherenceRequestType:PUTS;
       out_msg.Requestor := machineID;
       out_msg.RequestorMachine := MachineType:L1Cache;
-      out_msg.Destination.add(mapAddressToRange(address, MachineType:L2Cache,
-              l2_select_low_bit, l2_select_num_bits, intToID(0)));
+      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Writeback_Control;
     }
   }
@@ -766,7 +804,7 @@ machine(L1Cache, "Directory protocol")
     }
   }
 
-  action(on_checkForCompletion, "o", desc="Check if we have received all the messages required for completion") {
+  action(on_checkForCompletion, "on", desc="Check if we have received all the messages required for completion") {
     assert(is_valid(tbe));
     if (tbe.NumPendingMsgs == 0) {
       enqueue(triggerQueue_out, TriggerMsg) {
@@ -966,7 +1004,7 @@ machine(L1Cache, "Directory protocol")
   //*****************************************************
 
   // Transitions for Load/Store/L2_Replacement from transient states
-  transition({IM, SM, OM, IS, OI, SI, MI, II}, {Store, L1_Replacement}) {
+  transition({IM, IM_M, SM, SM_M, OM, OM_M, IS, IS_N, OI, SI, MI, II}, {Store, L1_Replacement}) {
     zz_recycleMandatoryQueue;
   }
 
@@ -978,7 +1016,7 @@ machine(L1Cache, "Directory protocol")
     z_recycleRequestQueue;
   }
 
-  transition({IM, IS, OI, MI, SI, II}, {Load, Ifetch}) {
+  transition({IM, IM_M, IS, IS_N, OI, MI, SI, II}, {Load, Ifetch}) {
     zz_recycleMandatoryQueue;
   }
 
@@ -999,7 +1037,7 @@ machine(L1Cache, "Directory protocol")
     k_popMandatoryQueue;
   }
 
-  // Wei modified.
+  // Wei modified. -------------
   transition(I, Store, IM_M) {
     ii_allocateL1DCacheBlock;
     i_allocateTBE;
@@ -1009,20 +1047,28 @@ machine(L1Cache, "Directory protocol")
   }
 
   transition(IM_M, Nack) {
-  ;
+    m_decrementNumberOfMessages;
+    on_checkForCompletion;
+    n_popResponseQueue;
   }
 
   transition(IM_M, All_nacks, IM) {
-  ;
+    b_issueGETX;
+    j_popTriggerQueue;
   }
 
   transition(IM_M, Ack, IM) {
-    ii_allocateL1DCacheBlock;
-    i_allocateTBE;
-    b_issueGETX;
-    uu_profileDataMiss;
-    k_popMandatoryQueue;
+    ms_setNumberOfMessagestozero;
+    b_issueGETXtoAcksender;
+    //uu_profileDataMiss;
+    n_popResponseQueue;
   }
+
+  transition(IM, Nack) {
+    //ms_setNumberOfMessagestozero;
+    n_popResponseQueue;
+  }
+    // --------------------------
 
   transition(I, L1_Replacement) {
     kk_deallocateL1CacheBlock;
@@ -1033,24 +1079,48 @@ machine(L1Cache, "Directory protocol")
     l_popForwardQueue;
   }
 
-  transition({S, SM, O, OM, MM, MM_W, M, M_W}, Load) {
+  transition({S, SM, SM_M, O, OM, OM_M, MM, MM_W, M, M_W}, Load) {
     h_load_hit;
     uu_profileDataHit;
     k_popMandatoryQueue;
   }
 
-  transition({S, SM, O, OM, MM, MM_W, M, M_W}, Ifetch) {
+  transition({S, SM, SM_M, O, OM, OM_M, MM, MM_W, M, M_W}, Ifetch) {
     h_load_hit;
     uu_profileInstHit;
     k_popMandatoryQueue;
   }
 
   // Transitions from Shared
-  transition(S, Store, SM) {
+  // Wei modified. ---------
+  transition(S, Store, SM_M) {
     i_allocateTBE;
     b_issueGETX;
     uu_profileDataMiss;
     k_popMandatoryQueue;
+  }
+
+  transition(SM_M, Nack) {
+    m_decrementNumberOfMessages;
+    on_checkForCompletion;
+    n_popResponseQueue;
+  }
+
+  transition(SM_M, All_nacks, SM) {
+    b_issueGETX;
+    j_popTriggerQueue;
+  }
+
+  transition(SM_M, Ack, SM) {
+    ms_setNumberOfMessagestozero;
+    b_issueGETXtoAcksender;
+    //uu_profileDataMiss;
+    n_popResponseQueue;
+  }
+
+  transition(SM, Nack) {
+    //ms_setNumberOfMessagestozero;
+    n_popResponseQueue;
   }
 
   transition(S, L1_Replacement, SI) {
@@ -1058,7 +1128,9 @@ machine(L1Cache, "Directory protocol")
     dd_issuePUTS;
     forward_eviction_to_cpu;
     kk_deallocateL1CacheBlock;
+    k_popMandatoryQueue;
   }
+    // -----------------------
 
   transition(S, Inv, I) {
     f_sendAck;
@@ -1084,12 +1156,37 @@ machine(L1Cache, "Directory protocol")
   }
 
   // Transitions from Owned
-  transition(O, Store, OM) {
+  // Wei modified. --------------
+  transition(O, Store, OM_M) {
     i_allocateTBE;
-    b_issueGETX;
+    b_issueGETXM;
     uu_profileDataMiss;
     k_popMandatoryQueue;
   }
+
+  transition(OM_M, Nack) {
+    m_decrementNumberOfMessages;
+    on_checkForCompletion;
+    n_popResponseQueue;
+  }
+
+  transition(OM_M, All_nacks, OM) {
+    b_issueGETX;
+    j_popTriggerQueue;
+  }
+
+  transition(OM_M, Ack, OM) {
+    ms_setNumberOfMessagestozero;
+    b_issueGETXtoAcksender;
+    //uu_profileDataMiss;
+    n_popResponseQueue;
+  }
+
+  transition(OM, Nack) {
+    //ms_setNumberOfMessagestozero;
+    n_popResponseQueue;
+  }
+  // ----------------------
 
   transition(O, L1_Replacement, OI) {
     i_allocateTBE;
@@ -1369,25 +1466,44 @@ machine(L1Cache, "Directory protocol")
     l_popForwardQueue;
   }
 
+  // Wei modified. ------------------
   transition({SI, OI, MI}, Writeback_Ack_Data, I) {
+    ms_setNumberOfMessagestozero;
     qq_sendWBDataFromTBEToL2;  // always send data
     s_deallocateTBE;
     l_popForwardQueue;
   }
 
   transition({SI, OI, MI}, Writeback_Ack, I) {
+    ms_setNumberOfMessagestozero;
     g_sendUnblock;
     s_deallocateTBE;
     l_popForwardQueue;
   }
 
-  transition({MI, OI}, Writeback_Nack, OI) {
+  transition(I, Writeback_Nack) {
+    l_popForwardQueue;
+  }
+
+  transition({MI, OI}, All_nacks, OI) {
     // FIXME: This might cause deadlock by re-using the writeback
     // channel, we should handle this case differently.
     dd_issuePUTO;
     l_popForwardQueue;
   }
 
+  transition({SI, MI, OI}, Writeback_Nack) {
+    m_decrementNumberOfMessages;
+    on_checkForCompletion;
+    l_popForwardQueue;
+  }
+
+  transition(SI, All_nacks) {
+    dd_issuePUTS;
+    j_popTriggerQueue;
+  }
+  // --------------------------
+  
   // Transitions from II
   transition(II, {Writeback_Ack, Writeback_Ack_Data}, I) {
     g_sendUnblock;
@@ -1398,11 +1514,6 @@ machine(L1Cache, "Directory protocol")
   // transition({II, SI}, Writeback_Nack, I) {
   transition(II, Writeback_Nack, I) {
     s_deallocateTBE;
-    l_popForwardQueue;
-  }
-
-  transition(SI, Writeback_Nack) {
-    dd_issuePUTS;
     l_popForwardQueue;
   }
 
