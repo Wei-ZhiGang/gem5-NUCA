@@ -51,6 +51,6 @@ class RubyController(MemObject):
     system = Param.System(Parent.any, "system object parameter")
 
     # Wei added for init L1 access metrix
-    number_of_L2sets = Param.Int("Number of L2 Cache sets")
-    number_of_banks_aset = Param.Int("Number of banks in one bankset")
-    number_of_cpus = Param.Int("Number of cpus")
+#    number_of_L2sets = Param.Int("Number of L2 Cache sets")
+#    number_of_banks_aset = Param.Int(8,"Number of banks in one bankset")
+#    number_of_cpus = Param.Int("Number of cpus")

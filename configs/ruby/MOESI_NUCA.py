@@ -51,7 +51,7 @@ def define_options(parser):
 
 def create_system(options, full_system, system, dma_ports, ruby_system):
 
-    if buildEnv['PROTOCOL'] != 'MOESI_CMP_directory':
+    if buildEnv['PROTOCOL'] != 'MOESI_NUCA':
         panic("This script requires the MOESI_CMP_directory protocol to be built.")
 
     cpu_sequencers = []
@@ -74,7 +74,7 @@ def create_system(options, full_system, system, dma_ports, ruby_system):
     block_size_bits = int(math.log(options.cacheline_size, 2))
 
     # Wei added for init the number of L2sets for L1 Cache.
-    number_of_L2sets = options.l2_size / options.cacheline_size
+#    number_of_L2sets = options.l2_size / options.cacheline_size
     number_of_banks_aset = options.num_l2caches / options.mesh_rows
 
     for i in xrange(options.num_cpus):
@@ -97,10 +97,10 @@ def create_system(options, full_system, system, dma_ports, ruby_system):
                                       send_evictions = send_evicts(options),
                                       transitions_per_cycle = options.ports,
                                       clk_domain=system.cpu[i].clk_domain,
-                                      ruby_system = ruby_system,
-                                      number_of_L2sets = number_of_L2sets,
-                                      number_of_banks_aset = number_of_banks_aset,
-                                      number_of_cpus = num_cpus)
+                                      ruby_system = ruby_system)
+#                                      number_of_L2sets = 1024,
+#                                      number_of_banks_aset = number_of_banks_aset,
+#                                      number_of_cpus = options.num_cpus)
 
         cpu_seq = RubySequencer(version = i,
                                 icache = l1i_cache,

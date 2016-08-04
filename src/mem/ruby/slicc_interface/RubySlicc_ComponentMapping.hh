@@ -84,7 +84,7 @@ multicast(MachineID machID, MachineType typeL1, MachineType typeL2)
 {
     NetDest dest;
     for(NodeID i = 0; i < MachineType_base_count(typeL2); i++) {
-        MachineID mach = {typeL2, i}
+        MachineID mach = {typeL2, i};
         if (machID.num == mach.num % MachineType_base_count(typeL1))
             dest.add(mach);
     }
@@ -102,7 +102,7 @@ countSetbanks(MachineType typeL1, MachineType typeL2)
 inline MachineID
 maptonearestbank(MachineID machID, MachineType type)
 {
-    MachineType mach;
+    MachineID mach;
     mach = {type, machID.num};
     return mach;
 }

@@ -150,9 +150,9 @@ class AbstractController : public MemObject, public Consumer
     int m_number_of_TBEs;
 
     // Wei added.
-    int m_number_of_L2sets;
-    int m_number_of_banks_aset;
-    int m_number_of_cpus;
+    //int m_number_of_L2sets;
+    //int m_number_of_banks_aset;
+    //int m_number_of_cpus;
 
     int m_transitions_per_cycle;
     unsigned int m_buffer_size;

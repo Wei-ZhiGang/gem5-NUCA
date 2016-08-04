@@ -348,6 +348,9 @@ machine(L1Cache, "Directory protocol")
         if (in_msg.Type == CoherenceResponseType:ACK) {
           trigger(Event:Ack, in_msg.Addr,
                   getCacheEntry(in_msg.Addr), TBEs[in_msg.Addr]);
+        } else if (in_msg.Type == CoherenceResponseType:NACK) {
+          trigger(Event:Nack, in_msg.Addr,
+                  getCacheEntry(in_msg.Addr), TBEs[in_msg.Addr]);
         } else if (in_msg.Type == CoherenceResponseType:DATA) {
           trigger(Event:Data, in_msg.Addr,
                   getCacheEntry(in_msg.Addr), TBEs[in_msg.Addr]);
@@ -452,7 +455,7 @@ machine(L1Cache, "Directory protocol")
         out_msg.RequestorMachine := MachineType:L1Cache;
         //out_msg.Destination.add(mapAddressToRange(address, MachineType:L2Cache,
         //      l2_select_low_bit, l2_select_num_bits, intToID(0)));
-        out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+        out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
         out_msg.MessageSize := MessageSizeType:Request_Control;
         out_msg.AccessMode := in_msg.AccessMode;
         out_msg.Prefetch := in_msg.Prefetch;
@@ -479,7 +482,8 @@ machine(L1Cache, "Directory protocol")
   }
 
   action(b_issueGETX, "b", desc="Issue GETX") {
-    peek(responseToL1Cache_in, ResponseMsg) {
+	peek(mandatoryQueue_in, RubyRequest) {
+      assert(is_valid(tbe));
       enqueue(requestNetwork_out, RequestMsg, request_latency) {
         out_msg.Addr := address;
         out_msg.Type := CoherenceRequestType:GETX;
@@ -487,8 +491,8 @@ machine(L1Cache, "Directory protocol")
         out_msg.RequestorMachine := MachineType:L1Cache;
         out_msg.Destination.add(maptonearestbank(machineID, MachineType:L2Cache));
         out_msg.MessageSize := MessageSizeType:Request_Control;
-        out_msg.AccessMode := in_msg.AccessMode;
-        out_msg.Prefetch := in_msg.Prefetch;
+        out_msg.AccessMode := tbe.AccessMode;
+        out_msg.Prefetch := tbe.Prefetch;
       }
     }
   }
@@ -504,7 +508,7 @@ machine(L1Cache, "Directory protocol")
         out_msg.Type := CoherenceRequestType:GETX_M;
         out_msg.Requestor := machineID;
         out_msg.RequestorMachine := MachineType:L1Cache;
-        out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+        out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
         out_msg.MessageSize := MessageSizeType:Request_Control;
         out_msg.AccessMode := in_msg.AccessMode;
         out_msg.Prefetch := in_msg.Prefetch;
@@ -512,7 +516,7 @@ machine(L1Cache, "Directory protocol")
     }
   }
 
-  action(b_issueGETXtoAcksender, "b", desc="Issue GETX to Ack sender") {
+  action(b_issueGETXtoAcksender, "bs", desc="Issue GETX to Ack sender") {
     peek(responseToL1Cache_in, ResponseMsg) {
       enqueue(requestNetwork_out, RequestMsg, request_latency) {
         out_msg.Addr := address;
@@ -521,8 +525,8 @@ machine(L1Cache, "Directory protocol")
         out_msg.RequestorMachine := MachineType:L1Cache;
         out_msg.Destination.add(in_msg.Sender);
         out_msg.MessageSize := MessageSizeType:Request_Control;
-        out_msg.AccessMode := in_msg.AccessMode;
-        out_msg.Prefetch := in_msg.Prefetch;
+        out_msg.AccessMode := tbe.AccessMode;
+        out_msg.Prefetch := tbe.Prefetch;
       }
     }
   }
@@ -535,7 +539,7 @@ machine(L1Cache, "Directory protocol")
       out_msg.Type := CoherenceRequestType:PUTX;
       out_msg.Requestor := machineID;
       out_msg.RequestorMachine := MachineType:L1Cache;
-      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+      out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Writeback_Control;
     }
   }
@@ -548,7 +552,7 @@ machine(L1Cache, "Directory protocol")
       out_msg.Type := CoherenceRequestType:PUTO;
       out_msg.Requestor := machineID;
       out_msg.RequestorMachine := MachineType:L1Cache;
-      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+      out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Writeback_Control;
     }
   }
@@ -561,7 +565,7 @@ machine(L1Cache, "Directory protocol")
       out_msg.Type := CoherenceRequestType:PUTS;
       out_msg.Requestor := machineID;
       out_msg.RequestorMachine := MachineType:L1Cache;
-      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+      out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Writeback_Control;
     }
   }
@@ -711,7 +715,7 @@ machine(L1Cache, "Directory protocol")
       out_msg.Type := CoherenceResponseType:UNBLOCK_EXCLUSIVE;
       out_msg.Sender := machineID;
       out_msg.SenderMachine := MachineType:L1Cache;
-      out_msg.Destination.addNetDest(multicast(MachineID, MachineType:L1Cache, MachineType:L2Cache));
+      out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Unblock_Control;
     }
   }
@@ -1095,7 +1099,7 @@ machine(L1Cache, "Directory protocol")
   // Wei modified. ---------
   transition(S, Store, SM_M) {
     i_allocateTBE;
-    b_issueGETX;
+    b_issueGETXM;
     uu_profileDataMiss;
     k_popMandatoryQueue;
   }

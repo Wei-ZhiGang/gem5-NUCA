@@ -1041,7 +1041,7 @@ machine(L2Cache, "Token protocol")
     }
   }
 
-  action(e_sendNackToL1RequestorFromTBE, "eee", desc="Send nack with the tokens we've collected thus far.") {
+  action(e_sendNackToL1RequestorFromTBE, "eeen", desc="Send nack with the tokens we've collected thus far.") {
     enqueue(responseNetwork_out, ResponseMsg, response_latency) {
       assert(is_valid(tbe));
       out_msg.Addr := address;
@@ -2086,11 +2086,12 @@ machine(L2Cache, "Token protocol")
   }
 
   transition({NP, I}, L1_GETS) {
-    //i_allocateTBE;
+    i_allocateTBE;
     s_recordGetSL1ID;
     //a_issueGETS;
     e_sendNackToL1Requestor;
     //uu_profileMiss;
+	s_deallocateTBE;
     o_popL1RequestQueue;
   }
 
@@ -2112,9 +2113,11 @@ machine(L2Cache, "Token protocol")
   
   // Wei added. --------------------
   transition({NP, I}, L1_GETX_M) {
+	i_allocateTBE;
     s_recordGetXL1ID;
     e_sendNackToL1RequestorFromTBE;
     //uu_profileMiss;
+	s_deallocateTBE;
     o_popL1RequestQueue;
   }
 

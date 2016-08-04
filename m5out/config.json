@@ -629,7 +629,7 @@
         "clk_domain": {
             "name": "clk_domain", 
             "clock": [
-                1000
+                10000
             ], 
             "init_perf_level": 0, 
             "voltage_domain": "system.voltage_domain", 
@@ -1396,7 +1396,7 @@
                 "ruby_system": "system.ruby", 
                 "eventq_index": 0, 
                 "reqToDir": {
-                    "peer": "system.ruby.network.slave[58]", 
+                    "peer": "system.ruby.network.slave[106]", 
                     "role": "MASTER"
                 }, 
                 "number_of_TBEs": 256, 
@@ -1405,7 +1405,7 @@
                 "clk_domain": "system.ruby.clk_domain", 
                 "system": "system", 
                 "respToDir": {
-                    "peer": "system.ruby.network.slave[59]", 
+                    "peer": "system.ruby.network.slave[107]", 
                     "role": "MASTER"
                 }, 
                 "version": 0, 
@@ -1416,7 +1416,7 @@
                 "request_latency": 14, 
                 "type": "DMA_Controller", 
                 "responseFromDir": {
-                    "peer": "system.ruby.network.master[58]", 
+                    "peer": "system.ruby.network.master[106]", 
                     "role": "SLAVE"
                 }, 
                 "dma_sequencer": {
@@ -1437,7 +1437,187 @@
                 }
             }, 
             "all_instructions": false, 
+            "l2_cntrl19": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[65]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[66]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 19, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl19.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[66]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[65]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl19", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[67]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl19", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[67]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl18": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[62]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[63]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 18, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl18.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[63]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[62]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl18", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[64]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl18", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[64]", 
+                    "role": "SLAVE"
+                }
+            }, 
             "memory_size_bits": 48, 
+            "l2_cntrl30": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[98]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[99]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 30, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl30.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[99]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[98]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl30", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[100]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl30", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[100]", 
+                    "role": "SLAVE"
+                }
+            }, 
             "cxx_class": "RubySystem", 
             "l2_cntrl11": {
                 "GlobalRequestFromL2Cache": {
@@ -1467,12 +1647,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl11.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[42]", 
@@ -1527,12 +1707,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl10.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[39]", 
@@ -1587,12 +1767,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl13.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[48]", 
@@ -1647,12 +1827,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl12.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[45]", 
@@ -1707,12 +1887,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl15.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[54]", 
@@ -1767,12 +1947,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl14.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[51]", 
@@ -1796,6 +1976,126 @@
                 "path": "system.ruby.l2_cntrl14", 
                 "responseToL2Cache": {
                     "peer": "system.ruby.network.master[52]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl17": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[59]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[60]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 17, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl17.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[60]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[59]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl17", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[61]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl17", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[61]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl16": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[56]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[57]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 16, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl16.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[57]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[56]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl16", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[58]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl16", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[58]", 
                     "role": "SLAVE"
                 }
             }, 
@@ -1827,12 +2127,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl9.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[36]", 
@@ -1859,13 +2159,13 @@
                     "role": "SLAVE"
                 }
             }, 
-            "l2_cntrl8": {
+            "l2_cntrl31": {
                 "GlobalRequestFromL2Cache": {
-                    "peer": "system.ruby.network.slave[32]", 
+                    "peer": "system.ruby.network.slave[101]", 
                     "role": "MASTER"
                 }, 
                 "L1RequestToL2Cache": {
-                    "peer": "system.ruby.network.master[33]", 
+                    "peer": "system.ruby.network.master[102]", 
                     "role": "SLAVE"
                 }, 
                 "system": "system", 
@@ -1874,7 +2174,7 @@
                 "cxx_class": "L2Cache_Controller", 
                 "recycle_latency": 10, 
                 "clk_domain": "system.ruby.clk_domain", 
-                "version": 8, 
+                "version": 31, 
                 "eventq_index": 0, 
                 "L2cache": {
                     "tagArrayBanks": 1, 
@@ -1887,35 +2187,35 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
-                    "path": "system.ruby.l2_cntrl8.L2cache", 
+                    "path": "system.ruby.l2_cntrl31.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
-                    "peer": "system.ruby.network.slave[33]", 
+                    "peer": "system.ruby.network.slave[102]", 
                     "role": "MASTER"
                 }, 
                 "number_of_TBEs": 256, 
                 "transitions_per_cycle": 4, 
                 "GlobalRequestToL2Cache": {
-                    "peer": "system.ruby.network.master[32]", 
+                    "peer": "system.ruby.network.master[101]", 
                     "role": "SLAVE"
                 }, 
                 "buffer_size": 0, 
                 "ruby_system": "system.ruby", 
-                "name": "l2_cntrl8", 
+                "name": "l2_cntrl31", 
                 "type": "L2Cache_Controller", 
                 "responseFromL2Cache": {
-                    "peer": "system.ruby.network.slave[34]", 
+                    "peer": "system.ruby.network.slave[103]", 
                     "role": "MASTER"
                 }, 
                 "request_latency": 2, 
-                "path": "system.ruby.l2_cntrl8", 
+                "path": "system.ruby.l2_cntrl31", 
                 "responseToL2Cache": {
-                    "peer": "system.ruby.network.master[34]", 
+                    "peer": "system.ruby.network.master[103]", 
                     "role": "SLAVE"
                 }
             }, 
@@ -1926,7 +2226,7 @@
                 }, 
                 "use_timeout_latency": 50, 
                 "system": "system", 
-                "l2_select_num_bits": 4, 
+                "l2_select_num_bits": 5, 
                 "cluster_id": 0, 
                 "sequencer": {
                     "deadlock_threshold": 500000, 
@@ -2046,7 +2346,7 @@
                 }, 
                 "use_timeout_latency": 50, 
                 "system": "system", 
-                "l2_select_num_bits": 4, 
+                "l2_select_num_bits": 5, 
                 "cluster_id": 0, 
                 "sequencer": {
                     "deadlock_threshold": 500000, 
@@ -2166,7 +2466,7 @@
                 }, 
                 "use_timeout_latency": 50, 
                 "system": "system", 
-                "l2_select_num_bits": 4, 
+                "l2_select_num_bits": 5, 
                 "cluster_id": 0, 
                 "sequencer": {
                     "deadlock_threshold": 500000, 
@@ -2286,7 +2586,7 @@
                 }, 
                 "use_timeout_latency": 50, 
                 "system": "system", 
-                "l2_select_num_bits": 4, 
+                "l2_select_num_bits": 5, 
                 "cluster_id": 0, 
                 "sequencer": {
                     "deadlock_threshold": 500000, 
@@ -2427,12 +2727,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl1.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[12]", 
@@ -2487,12 +2787,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl0.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[9]", 
@@ -2547,12 +2847,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl3.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[18]", 
@@ -2607,12 +2907,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl2.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[15]", 
@@ -2667,12 +2967,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl5.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[24]", 
@@ -2740,12 +3040,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl7.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[30]", 
@@ -2800,12 +3100,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl6.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[27]", 
@@ -2837,6 +3137,66 @@
             "phys_mem": null, 
             "type": "RubySystem", 
             "random_seed": 1234, 
+            "l2_cntrl8": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[32]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[33]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 8, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl8.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[33]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[32]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl8", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[34]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl8", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[34]", 
+                    "role": "SLAVE"
+                }
+            }, 
             "hot_lines": false, 
             "l2_cntrl4": {
                 "GlobalRequestFromL2Cache": {
@@ -2866,12 +3226,12 @@
                     "tagAccessLatency": 1, 
                     "replacement_policy": "PSEUDO_LRU", 
                     "assoc": 8, 
-                    "start_index_bit": 10, 
+                    "start_index_bit": 6, 
                     "dataAccessLatency": 1, 
                     "path": "system.ruby.l2_cntrl4.L2cache", 
                     "resourceStalls": false, 
                     "type": "RubyCache", 
-                    "size": 2097152
+                    "size": 65536
                 }, 
                 "L1RequestFromL2Cache": {
                     "peer": "system.ruby.network.slave[21]", 
@@ -2904,7 +3264,7 @@
                 "ruby_system": "system.ruby", 
                 "eventq_index": 0, 
                 "reqToDir": {
-                    "peer": "system.ruby.network.slave[60]", 
+                    "peer": "system.ruby.network.slave[108]", 
                     "role": "MASTER"
                 }, 
                 "number_of_TBEs": 256, 
@@ -2913,7 +3273,7 @@
                 "clk_domain": "system.ruby.clk_domain", 
                 "system": "system", 
                 "respToDir": {
-                    "peer": "system.ruby.network.slave[61]", 
+                    "peer": "system.ruby.network.slave[109]", 
                     "role": "MASTER"
                 }, 
                 "version": 1, 
@@ -2924,7 +3284,7 @@
                 "request_latency": 14, 
                 "type": "DMA_Controller", 
                 "responseFromDir": {
-                    "peer": "system.ruby.network.master[59]", 
+                    "peer": "system.ruby.network.master[107]", 
                     "role": "SLAVE"
                 }, 
                 "dma_sequencer": {
@@ -2944,16 +3304,550 @@
                     "ruby_system": "system.ruby"
                 }
             }, 
-            "path": "system.ruby", 
-            "memctrl_clk_domain": {
-                "name": "memctrl_clk_domain", 
+            "l2_cntrl28": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[92]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[93]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
                 "clk_domain": "system.ruby.clk_domain", 
+                "version": 28, 
                 "eventq_index": 0, 
-                "cxx_class": "DerivedClockDomain", 
-                "path": "system.ruby.memctrl_clk_domain", 
-                "type": "DerivedClockDomain", 
-                "clk_divider": 3
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl28.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[93]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[92]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl28", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[94]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl28", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[94]", 
+                    "role": "SLAVE"
+                }
             }, 
+            "l2_cntrl29": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[95]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[96]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 29, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl29.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[96]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[95]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl29", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[97]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl29", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[97]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl24": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[80]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[81]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 24, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl24.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[81]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[80]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl24", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[82]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl24", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[82]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "path": "system.ruby", 
+            "l2_cntrl25": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[83]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[84]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 25, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl25.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[84]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[83]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl25", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[85]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl25", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[85]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl27": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[89]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[90]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 27, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl27.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[90]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[89]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl27", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[91]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl27", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[91]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl20": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[68]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[69]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 20, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl20.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[69]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[68]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl20", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[70]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl20", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[70]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl21": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[71]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[72]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 21, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl21.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[72]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[71]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl21", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[73]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl21", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[73]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl22": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[74]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[75]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 22, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl22.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[75]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[74]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl22", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[76]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl22", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[76]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "l2_cntrl23": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[77]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[78]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 23, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl23.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[78]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[77]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl23", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[79]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl23", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[79]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "name": "ruby", 
+            "block_size_bytes": 64, 
+            "access_backing_store": false, 
             "network": {
                 "slave": {
                     "peer": [
@@ -3013,6 +3907,54 @@
                         "system.ruby.l2_cntrl15.GlobalRequestFromL2Cache", 
                         "system.ruby.l2_cntrl15.L1RequestFromL2Cache", 
                         "system.ruby.l2_cntrl15.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl16.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl16.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl16.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl17.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl17.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl17.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl18.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl18.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl18.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl19.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl19.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl19.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl20.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl20.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl20.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl21.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl21.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl21.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl22.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl22.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl22.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl23.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl23.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl23.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl24.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl24.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl24.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl25.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl25.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl25.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl26.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl26.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl26.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl27.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl27.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl27.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl28.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl28.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl28.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl29.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl29.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl29.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl30.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl30.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl30.responseFromL2Cache", 
+                        "system.ruby.l2_cntrl31.GlobalRequestFromL2Cache", 
+                        "system.ruby.l2_cntrl31.L1RequestFromL2Cache", 
+                        "system.ruby.l2_cntrl31.responseFromL2Cache", 
                         "system.ruby.dir_cntrl0.responseFromDir", 
                         "system.ruby.dir_cntrl0.forwardFromDir", 
                         "system.ruby.dma_cntrl0.reqToDir", 
@@ -3028,12 +3970,12 @@
                         "latency": 1, 
                         "name": "int_links00", 
                         "weight": 1, 
-                        "link_id": 23, 
+                        "link_id": 39, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links00", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers01", 
+                        "node_b": "system.ruby.network.routers04", 
                         "node_a": "system.ruby.network.routers00", 
                         "bandwidth_factor": 16
                     }, 
@@ -3041,142 +3983,142 @@
                         "latency": 1, 
                         "name": "int_links01", 
                         "weight": 1, 
-                        "link_id": 24, 
+                        "link_id": 40, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links01", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers02", 
-                        "node_a": "system.ruby.network.routers01", 
+                        "node_b": "system.ruby.network.routers08", 
+                        "node_a": "system.ruby.network.routers04", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links02", 
                         "weight": 1, 
-                        "link_id": 25, 
+                        "link_id": 41, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links02", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers03", 
-                        "node_a": "system.ruby.network.routers02", 
+                        "node_b": "system.ruby.network.routers12", 
+                        "node_a": "system.ruby.network.routers08", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links03", 
                         "weight": 1, 
-                        "link_id": 26, 
+                        "link_id": 42, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links03", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers04", 
-                        "node_a": "system.ruby.network.routers03", 
+                        "node_b": "system.ruby.network.routers16", 
+                        "node_a": "system.ruby.network.routers12", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links04", 
                         "weight": 1, 
-                        "link_id": 27, 
+                        "link_id": 43, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links04", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers06", 
-                        "node_a": "system.ruby.network.routers05", 
+                        "node_b": "system.ruby.network.routers20", 
+                        "node_a": "system.ruby.network.routers16", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links05", 
                         "weight": 1, 
-                        "link_id": 28, 
+                        "link_id": 44, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links05", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers07", 
-                        "node_a": "system.ruby.network.routers06", 
+                        "node_b": "system.ruby.network.routers24", 
+                        "node_a": "system.ruby.network.routers20", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links06", 
                         "weight": 1, 
-                        "link_id": 29, 
+                        "link_id": 45, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links06", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers08", 
-                        "node_a": "system.ruby.network.routers07", 
+                        "node_b": "system.ruby.network.routers28", 
+                        "node_a": "system.ruby.network.routers24", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links07", 
                         "weight": 1, 
-                        "link_id": 30, 
+                        "link_id": 46, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links07", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers09", 
-                        "node_a": "system.ruby.network.routers08", 
+                        "node_b": "system.ruby.network.routers32", 
+                        "node_a": "system.ruby.network.routers28", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links08", 
                         "weight": 1, 
-                        "link_id": 31, 
+                        "link_id": 47, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links08", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers11", 
-                        "node_a": "system.ruby.network.routers10", 
+                        "node_b": "system.ruby.network.routers05", 
+                        "node_a": "system.ruby.network.routers01", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links09", 
                         "weight": 1, 
-                        "link_id": 32, 
+                        "link_id": 48, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links09", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers12", 
-                        "node_a": "system.ruby.network.routers11", 
+                        "node_b": "system.ruby.network.routers09", 
+                        "node_a": "system.ruby.network.routers05", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links10", 
                         "weight": 1, 
-                        "link_id": 33, 
+                        "link_id": 49, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links10", 
                         "type": "SimpleIntLink", 
                         "node_b": "system.ruby.network.routers13", 
-                        "node_a": "system.ruby.network.routers12", 
+                        "node_a": "system.ruby.network.routers09", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links11", 
                         "weight": 1, 
-                        "link_id": 34, 
+                        "link_id": 50, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links11", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers14", 
+                        "node_b": "system.ruby.network.routers17", 
                         "node_a": "system.ruby.network.routers13", 
                         "bandwidth_factor": 16
                     }, 
@@ -3184,23 +4126,426 @@
                         "latency": 1, 
                         "name": "int_links12", 
                         "weight": 1, 
-                        "link_id": 35, 
+                        "link_id": 51, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links12", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers16", 
-                        "node_a": "system.ruby.network.routers15", 
+                        "node_b": "system.ruby.network.routers21", 
+                        "node_a": "system.ruby.network.routers17", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
                         "name": "int_links13", 
                         "weight": 1, 
-                        "link_id": 36, 
+                        "link_id": 52, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
                         "path": "system.ruby.network.int_links13", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers25", 
+                        "node_a": "system.ruby.network.routers21", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links14", 
+                        "weight": 1, 
+                        "link_id": 53, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links14", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers29", 
+                        "node_a": "system.ruby.network.routers25", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links15", 
+                        "weight": 1, 
+                        "link_id": 54, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links15", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers33", 
+                        "node_a": "system.ruby.network.routers29", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links16", 
+                        "weight": 1, 
+                        "link_id": 55, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links16", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers06", 
+                        "node_a": "system.ruby.network.routers02", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links17", 
+                        "weight": 1, 
+                        "link_id": 56, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links17", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers10", 
+                        "node_a": "system.ruby.network.routers06", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links18", 
+                        "weight": 1, 
+                        "link_id": 57, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links18", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers14", 
+                        "node_a": "system.ruby.network.routers10", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links19", 
+                        "weight": 1, 
+                        "link_id": 58, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links19", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers18", 
+                        "node_a": "system.ruby.network.routers14", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links20", 
+                        "weight": 1, 
+                        "link_id": 59, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links20", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers22", 
+                        "node_a": "system.ruby.network.routers18", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links21", 
+                        "weight": 1, 
+                        "link_id": 60, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links21", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers26", 
+                        "node_a": "system.ruby.network.routers22", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links22", 
+                        "weight": 1, 
+                        "link_id": 61, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links22", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers30", 
+                        "node_a": "system.ruby.network.routers26", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links23", 
+                        "weight": 1, 
+                        "link_id": 62, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links23", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers34", 
+                        "node_a": "system.ruby.network.routers30", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links24", 
+                        "weight": 1, 
+                        "link_id": 63, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links24", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers07", 
+                        "node_a": "system.ruby.network.routers03", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links25", 
+                        "weight": 1, 
+                        "link_id": 64, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links25", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers11", 
+                        "node_a": "system.ruby.network.routers07", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links26", 
+                        "weight": 1, 
+                        "link_id": 65, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links26", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers15", 
+                        "node_a": "system.ruby.network.routers11", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links27", 
+                        "weight": 1, 
+                        "link_id": 66, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links27", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers19", 
+                        "node_a": "system.ruby.network.routers15", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links28", 
+                        "weight": 1, 
+                        "link_id": 67, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links28", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers23", 
+                        "node_a": "system.ruby.network.routers19", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links29", 
+                        "weight": 1, 
+                        "link_id": 68, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links29", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers27", 
+                        "node_a": "system.ruby.network.routers23", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links30", 
+                        "weight": 1, 
+                        "link_id": 69, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links30", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers31", 
+                        "node_a": "system.ruby.network.routers27", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links31", 
+                        "weight": 1, 
+                        "link_id": 70, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links31", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers35", 
+                        "node_a": "system.ruby.network.routers31", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links32", 
+                        "weight": 2, 
+                        "link_id": 71, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links32", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers01", 
+                        "node_a": "system.ruby.network.routers00", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links33", 
+                        "weight": 2, 
+                        "link_id": 72, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links33", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers02", 
+                        "node_a": "system.ruby.network.routers01", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links34", 
+                        "weight": 2, 
+                        "link_id": 73, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links34", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers03", 
+                        "node_a": "system.ruby.network.routers02", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links35", 
+                        "weight": 2, 
+                        "link_id": 74, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links35", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers05", 
+                        "node_a": "system.ruby.network.routers04", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links36", 
+                        "weight": 2, 
+                        "link_id": 75, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links36", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers06", 
+                        "node_a": "system.ruby.network.routers05", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links37", 
+                        "weight": 2, 
+                        "link_id": 76, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links37", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers07", 
+                        "node_a": "system.ruby.network.routers06", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links38", 
+                        "weight": 2, 
+                        "link_id": 77, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links38", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers09", 
+                        "node_a": "system.ruby.network.routers08", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links39", 
+                        "weight": 2, 
+                        "link_id": 78, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links39", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers10", 
+                        "node_a": "system.ruby.network.routers09", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links40", 
+                        "weight": 2, 
+                        "link_id": 79, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links40", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers11", 
+                        "node_a": "system.ruby.network.routers10", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links41", 
+                        "weight": 2, 
+                        "link_id": 80, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links41", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers13", 
+                        "node_a": "system.ruby.network.routers12", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links42", 
+                        "weight": 2, 
+                        "link_id": 81, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links42", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers14", 
+                        "node_a": "system.ruby.network.routers13", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links43", 
+                        "weight": 2, 
+                        "link_id": 82, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links43", 
+                        "type": "SimpleIntLink", 
+                        "node_b": "system.ruby.network.routers15", 
+                        "node_a": "system.ruby.network.routers14", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "int_links44", 
+                        "weight": 2, 
+                        "link_id": 83, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleIntLink", 
+                        "path": "system.ruby.network.int_links44", 
                         "type": "SimpleIntLink", 
                         "node_b": "system.ruby.network.routers17", 
                         "node_a": "system.ruby.network.routers16", 
@@ -3208,12 +4553,12 @@
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links14", 
-                        "weight": 1, 
-                        "link_id": 37, 
+                        "name": "int_links45", 
+                        "weight": 2, 
+                        "link_id": 84, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links14", 
+                        "path": "system.ruby.network.int_links45", 
                         "type": "SimpleIntLink", 
                         "node_b": "system.ruby.network.routers18", 
                         "node_a": "system.ruby.network.routers17", 
@@ -3221,12 +4566,12 @@
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links15", 
-                        "weight": 1, 
-                        "link_id": 38, 
+                        "name": "int_links46", 
+                        "weight": 2, 
+                        "link_id": 85, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links15", 
+                        "path": "system.ruby.network.int_links46", 
                         "type": "SimpleIntLink", 
                         "node_b": "system.ruby.network.routers19", 
                         "node_a": "system.ruby.network.routers18", 
@@ -3234,197 +4579,158 @@
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links16", 
+                        "name": "int_links47", 
                         "weight": 2, 
-                        "link_id": 39, 
+                        "link_id": 86, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links16", 
+                        "path": "system.ruby.network.int_links47", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers05", 
-                        "node_a": "system.ruby.network.routers00", 
+                        "node_b": "system.ruby.network.routers21", 
+                        "node_a": "system.ruby.network.routers20", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links17", 
+                        "name": "int_links48", 
                         "weight": 2, 
-                        "link_id": 40, 
+                        "link_id": 87, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links17", 
+                        "path": "system.ruby.network.int_links48", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers10", 
-                        "node_a": "system.ruby.network.routers05", 
+                        "node_b": "system.ruby.network.routers22", 
+                        "node_a": "system.ruby.network.routers21", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links18", 
+                        "name": "int_links49", 
                         "weight": 2, 
-                        "link_id": 41, 
+                        "link_id": 88, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links18", 
+                        "path": "system.ruby.network.int_links49", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers15", 
-                        "node_a": "system.ruby.network.routers10", 
+                        "node_b": "system.ruby.network.routers23", 
+                        "node_a": "system.ruby.network.routers22", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links19", 
+                        "name": "int_links50", 
                         "weight": 2, 
-                        "link_id": 42, 
+                        "link_id": 89, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links19", 
+                        "path": "system.ruby.network.int_links50", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers06", 
-                        "node_a": "system.ruby.network.routers01", 
+                        "node_b": "system.ruby.network.routers25", 
+                        "node_a": "system.ruby.network.routers24", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links20", 
+                        "name": "int_links51", 
                         "weight": 2, 
-                        "link_id": 43, 
+                        "link_id": 90, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links20", 
+                        "path": "system.ruby.network.int_links51", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers11", 
-                        "node_a": "system.ruby.network.routers06", 
+                        "node_b": "system.ruby.network.routers26", 
+                        "node_a": "system.ruby.network.routers25", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links21", 
+                        "name": "int_links52", 
                         "weight": 2, 
-                        "link_id": 44, 
+                        "link_id": 91, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links21", 
+                        "path": "system.ruby.network.int_links52", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers16", 
-                        "node_a": "system.ruby.network.routers11", 
+                        "node_b": "system.ruby.network.routers27", 
+                        "node_a": "system.ruby.network.routers26", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links22", 
+                        "name": "int_links53", 
                         "weight": 2, 
-                        "link_id": 45, 
+                        "link_id": 92, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links22", 
+                        "path": "system.ruby.network.int_links53", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers07", 
-                        "node_a": "system.ruby.network.routers02", 
+                        "node_b": "system.ruby.network.routers29", 
+                        "node_a": "system.ruby.network.routers28", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links23", 
+                        "name": "int_links54", 
                         "weight": 2, 
-                        "link_id": 46, 
+                        "link_id": 93, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links23", 
+                        "path": "system.ruby.network.int_links54", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers12", 
-                        "node_a": "system.ruby.network.routers07", 
+                        "node_b": "system.ruby.network.routers30", 
+                        "node_a": "system.ruby.network.routers29", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links24", 
+                        "name": "int_links55", 
                         "weight": 2, 
-                        "link_id": 47, 
+                        "link_id": 94, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links24", 
+                        "path": "system.ruby.network.int_links55", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers17", 
-                        "node_a": "system.ruby.network.routers12", 
+                        "node_b": "system.ruby.network.routers31", 
+                        "node_a": "system.ruby.network.routers30", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links25", 
+                        "name": "int_links56", 
                         "weight": 2, 
-                        "link_id": 48, 
+                        "link_id": 95, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links25", 
+                        "path": "system.ruby.network.int_links56", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers08", 
-                        "node_a": "system.ruby.network.routers03", 
+                        "node_b": "system.ruby.network.routers33", 
+                        "node_a": "system.ruby.network.routers32", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links26", 
+                        "name": "int_links57", 
                         "weight": 2, 
-                        "link_id": 49, 
+                        "link_id": 96, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links26", 
+                        "path": "system.ruby.network.int_links57", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers13", 
-                        "node_a": "system.ruby.network.routers08", 
+                        "node_b": "system.ruby.network.routers34", 
+                        "node_a": "system.ruby.network.routers33", 
                         "bandwidth_factor": 16
                     }, 
                     {
                         "latency": 1, 
-                        "name": "int_links27", 
+                        "name": "int_links58", 
                         "weight": 2, 
-                        "link_id": 50, 
+                        "link_id": 97, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links27", 
+                        "path": "system.ruby.network.int_links58", 
                         "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers18", 
-                        "node_a": "system.ruby.network.routers13", 
-                        "bandwidth_factor": 16
-                    }, 
-                    {
-                        "latency": 1, 
-                        "name": "int_links28", 
-                        "weight": 2, 
-                        "link_id": 51, 
-                        "eventq_index": 0, 
-                        "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links28", 
-                        "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers09", 
-                        "node_a": "system.ruby.network.routers04", 
-                        "bandwidth_factor": 16
-                    }, 
-                    {
-                        "latency": 1, 
-                        "name": "int_links29", 
-                        "weight": 2, 
-                        "link_id": 52, 
-                        "eventq_index": 0, 
-                        "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links29", 
-                        "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers14", 
-                        "node_a": "system.ruby.network.routers09", 
-                        "bandwidth_factor": 16
-                    }, 
-                    {
-                        "latency": 1, 
-                        "name": "int_links30", 
-                        "weight": 2, 
-                        "link_id": 53, 
-                        "eventq_index": 0, 
-                        "cxx_class": "SimpleIntLink", 
-                        "path": "system.ruby.network.int_links30", 
-                        "type": "SimpleIntLink", 
-                        "node_b": "system.ruby.network.routers19", 
-                        "node_a": "system.ruby.network.routers14", 
+                        "node_b": "system.ruby.network.routers35", 
+                        "node_a": "system.ruby.network.routers34", 
                         "bandwidth_factor": 16
                     }
                 ], 
@@ -3627,6 +4933,166 @@
                         "eventq_index": 0, 
                         "cxx_class": "Switch", 
                         "path": "system.ruby.network.routers19", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 20, 
+                        "name": "routers20", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers20", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 21, 
+                        "name": "routers21", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers21", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 22, 
+                        "name": "routers22", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers22", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 23, 
+                        "name": "routers23", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers23", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 24, 
+                        "name": "routers24", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers24", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 25, 
+                        "name": "routers25", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers25", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 26, 
+                        "name": "routers26", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers26", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 27, 
+                        "name": "routers27", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers27", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 28, 
+                        "name": "routers28", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers28", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 29, 
+                        "name": "routers29", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers29", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 30, 
+                        "name": "routers30", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers30", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 31, 
+                        "name": "routers31", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers31", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 32, 
+                        "name": "routers32", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers32", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 33, 
+                        "name": "routers33", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers33", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 34, 
+                        "name": "routers34", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers34", 
+                        "type": "Switch"
+                    }, 
+                    {
+                        "router_id": 35, 
+                        "name": "routers35", 
+                        "virt_nets": 10, 
+                        "clk_domain": "system.ruby.clk_domain", 
+                        "eventq_index": 0, 
+                        "cxx_class": "Switch", 
+                        "path": "system.ruby.network.routers35", 
                         "type": "Switch"
                     }
                 ], 
@@ -3897,12 +5363,12 @@
                         "latency": 1, 
                         "name": "ext_links20", 
                         "weight": 1, 
-                        "ext_node": "system.ruby.dir_cntrl0", 
+                        "ext_node": "system.ruby.l2_cntrl16", 
                         "link_id": 20, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleExtLink", 
                         "path": "system.ruby.network.ext_links20", 
-                        "int_node": "system.ruby.network.routers00", 
+                        "int_node": "system.ruby.network.routers20", 
                         "type": "SimpleExtLink", 
                         "bandwidth_factor": 16
                     }, 
@@ -3910,12 +5376,12 @@
                         "latency": 1, 
                         "name": "ext_links21", 
                         "weight": 1, 
-                        "ext_node": "system.ruby.dma_cntrl0", 
+                        "ext_node": "system.ruby.l2_cntrl17", 
                         "link_id": 21, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleExtLink", 
                         "path": "system.ruby.network.ext_links21", 
-                        "int_node": "system.ruby.network.routers00", 
+                        "int_node": "system.ruby.network.routers21", 
                         "type": "SimpleExtLink", 
                         "bandwidth_factor": 16
                     }, 
@@ -3923,11 +5389,219 @@
                         "latency": 1, 
                         "name": "ext_links22", 
                         "weight": 1, 
-                        "ext_node": "system.ruby.io_controller", 
+                        "ext_node": "system.ruby.l2_cntrl18", 
                         "link_id": 22, 
                         "eventq_index": 0, 
                         "cxx_class": "SimpleExtLink", 
                         "path": "system.ruby.network.ext_links22", 
+                        "int_node": "system.ruby.network.routers22", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links23", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl19", 
+                        "link_id": 23, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links23", 
+                        "int_node": "system.ruby.network.routers23", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links24", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl20", 
+                        "link_id": 24, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links24", 
+                        "int_node": "system.ruby.network.routers24", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links25", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl21", 
+                        "link_id": 25, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links25", 
+                        "int_node": "system.ruby.network.routers25", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links26", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl22", 
+                        "link_id": 26, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links26", 
+                        "int_node": "system.ruby.network.routers26", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links27", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl23", 
+                        "link_id": 27, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links27", 
+                        "int_node": "system.ruby.network.routers27", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links28", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl24", 
+                        "link_id": 28, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links28", 
+                        "int_node": "system.ruby.network.routers28", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links29", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl25", 
+                        "link_id": 29, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links29", 
+                        "int_node": "system.ruby.network.routers29", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links30", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl26", 
+                        "link_id": 30, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links30", 
+                        "int_node": "system.ruby.network.routers30", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links31", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl27", 
+                        "link_id": 31, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links31", 
+                        "int_node": "system.ruby.network.routers31", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links32", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl28", 
+                        "link_id": 32, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links32", 
+                        "int_node": "system.ruby.network.routers32", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links33", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl29", 
+                        "link_id": 33, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links33", 
+                        "int_node": "system.ruby.network.routers33", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links34", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl30", 
+                        "link_id": 34, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links34", 
+                        "int_node": "system.ruby.network.routers34", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links35", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.l2_cntrl31", 
+                        "link_id": 35, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links35", 
+                        "int_node": "system.ruby.network.routers35", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links36", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.dir_cntrl0", 
+                        "link_id": 36, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links36", 
+                        "int_node": "system.ruby.network.routers00", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links37", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.dma_cntrl0", 
+                        "link_id": 37, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links37", 
+                        "int_node": "system.ruby.network.routers00", 
+                        "type": "SimpleExtLink", 
+                        "bandwidth_factor": 16
+                    }, 
+                    {
+                        "latency": 1, 
+                        "name": "ext_links38", 
+                        "weight": 1, 
+                        "ext_node": "system.ruby.io_controller", 
+                        "link_id": 38, 
+                        "eventq_index": 0, 
+                        "cxx_class": "SimpleExtLink", 
+                        "path": "system.ruby.network.ext_links38", 
                         "int_node": "system.ruby.network.routers00", 
                         "type": "SimpleExtLink", 
                         "bandwidth_factor": 16
@@ -3999,6 +5673,54 @@
                         "system.ruby.l2_cntrl15.GlobalRequestToL2Cache", 
                         "system.ruby.l2_cntrl15.L1RequestToL2Cache", 
                         "system.ruby.l2_cntrl15.responseToL2Cache", 
+                        "system.ruby.l2_cntrl16.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl16.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl16.responseToL2Cache", 
+                        "system.ruby.l2_cntrl17.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl17.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl17.responseToL2Cache", 
+                        "system.ruby.l2_cntrl18.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl18.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl18.responseToL2Cache", 
+                        "system.ruby.l2_cntrl19.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl19.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl19.responseToL2Cache", 
+                        "system.ruby.l2_cntrl20.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl20.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl20.responseToL2Cache", 
+                        "system.ruby.l2_cntrl21.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl21.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl21.responseToL2Cache", 
+                        "system.ruby.l2_cntrl22.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl22.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl22.responseToL2Cache", 
+                        "system.ruby.l2_cntrl23.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl23.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl23.responseToL2Cache", 
+                        "system.ruby.l2_cntrl24.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl24.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl24.responseToL2Cache", 
+                        "system.ruby.l2_cntrl25.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl25.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl25.responseToL2Cache", 
+                        "system.ruby.l2_cntrl26.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl26.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl26.responseToL2Cache", 
+                        "system.ruby.l2_cntrl27.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl27.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl27.responseToL2Cache", 
+                        "system.ruby.l2_cntrl28.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl28.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl28.responseToL2Cache", 
+                        "system.ruby.l2_cntrl29.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl29.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl29.responseToL2Cache", 
+                        "system.ruby.l2_cntrl30.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl30.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl30.responseToL2Cache", 
+                        "system.ruby.l2_cntrl31.GlobalRequestToL2Cache", 
+                        "system.ruby.l2_cntrl31.L1RequestToL2Cache", 
+                        "system.ruby.l2_cntrl31.responseToL2Cache", 
                         "system.ruby.dir_cntrl0.requestToDir", 
                         "system.ruby.dir_cntrl0.responseToDir", 
                         "system.ruby.dma_cntrl0.responseFromDir", 
@@ -4010,16 +5732,82 @@
                 "type": "SimpleNetwork", 
                 "ruby_system": "system.ruby"
             }, 
-            "name": "ruby", 
-            "block_size_bytes": 64, 
-            "access_backing_store": false, 
             "num_of_sequencers": 4, 
+            "l2_cntrl26": {
+                "GlobalRequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[86]", 
+                    "role": "MASTER"
+                }, 
+                "L1RequestToL2Cache": {
+                    "peer": "system.ruby.network.master[87]", 
+                    "role": "SLAVE"
+                }, 
+                "system": "system", 
+                "cluster_id": 0, 
+                "response_latency": 2, 
+                "cxx_class": "L2Cache_Controller", 
+                "recycle_latency": 10, 
+                "clk_domain": "system.ruby.clk_domain", 
+                "version": 26, 
+                "eventq_index": 0, 
+                "L2cache": {
+                    "tagArrayBanks": 1, 
+                    "latency": 15, 
+                    "is_icache": false, 
+                    "name": "L2cache", 
+                    "eventq_index": 0, 
+                    "dataArrayBanks": 1, 
+                    "cxx_class": "CacheMemory", 
+                    "tagAccessLatency": 1, 
+                    "replacement_policy": "PSEUDO_LRU", 
+                    "assoc": 8, 
+                    "start_index_bit": 6, 
+                    "dataAccessLatency": 1, 
+                    "path": "system.ruby.l2_cntrl26.L2cache", 
+                    "resourceStalls": false, 
+                    "type": "RubyCache", 
+                    "size": 65536
+                }, 
+                "L1RequestFromL2Cache": {
+                    "peer": "system.ruby.network.slave[87]", 
+                    "role": "MASTER"
+                }, 
+                "number_of_TBEs": 256, 
+                "transitions_per_cycle": 4, 
+                "GlobalRequestToL2Cache": {
+                    "peer": "system.ruby.network.master[86]", 
+                    "role": "SLAVE"
+                }, 
+                "buffer_size": 0, 
+                "ruby_system": "system.ruby", 
+                "name": "l2_cntrl26", 
+                "type": "L2Cache_Controller", 
+                "responseFromL2Cache": {
+                    "peer": "system.ruby.network.slave[88]", 
+                    "role": "MASTER"
+                }, 
+                "request_latency": 2, 
+                "path": "system.ruby.l2_cntrl26", 
+                "responseToL2Cache": {
+                    "peer": "system.ruby.network.master[88]", 
+                    "role": "SLAVE"
+                }
+            }, 
+            "memctrl_clk_domain": {
+                "name": "memctrl_clk_domain", 
+                "clk_domain": "system.ruby.clk_domain", 
+                "eventq_index": 0, 
+                "cxx_class": "DerivedClockDomain", 
+                "path": "system.ruby.memctrl_clk_domain", 
+                "type": "DerivedClockDomain", 
+                "clk_divider": 3
+            }, 
             "dir_cntrl0": {
                 "system": "system", 
                 "cluster_id": 0, 
                 "cxx_class": "Directory_Controller", 
                 "forwardFromDir": {
-                    "peer": "system.ruby.network.slave[57]", 
+                    "peer": "system.ruby.network.slave[105]", 
                     "role": "MASTER"
                 }, 
                 "recycle_latency": 10, 
@@ -4034,20 +5822,20 @@
                 "number_of_TBEs": 256, 
                 "to_memory_controller_latency": 1, 
                 "responseFromDir": {
-                    "peer": "system.ruby.network.slave[56]", 
+                    "peer": "system.ruby.network.slave[104]", 
                     "role": "MASTER"
                 }, 
                 "transitions_per_cycle": 4, 
                 "buffer_size": 0, 
                 "ruby_system": "system.ruby", 
                 "requestToDir": {
-                    "peer": "system.ruby.network.master[56]", 
+                    "peer": "system.ruby.network.master[104]", 
                     "role": "SLAVE"
                 }, 
                 "name": "dir_cntrl0", 
                 "type": "Directory_Controller", 
                 "responseToDir": {
-                    "peer": "system.ruby.network.master[57]", 
+                    "peer": "system.ruby.network.master[105]", 
                     "role": "SLAVE"
                 }, 
                 "directory": {
