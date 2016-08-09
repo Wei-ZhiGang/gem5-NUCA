@@ -2104,7 +2104,7 @@ machine(L2Cache, "Token protocol")
   }
 
   transition({NP, I}, L1_GETX, IGM) {
-    i_allocateTBE;
+    //i_allocateTBE;
     s_recordGetXL1ID;
     a_issueGETX;
     uu_profileMiss;
@@ -2113,11 +2113,11 @@ machine(L2Cache, "Token protocol")
   
   // Wei added. --------------------
   transition({NP, I}, L1_GETX_M) {
-	i_allocateTBE;
+	  i_allocateTBE;
     s_recordGetXL1ID;
     e_sendNackToL1RequestorFromTBE;
     //uu_profileMiss;
-	s_deallocateTBE;
+	  s_deallocateTBE;
     o_popL1RequestQueue;
   }
 

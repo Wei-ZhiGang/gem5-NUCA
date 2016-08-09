@@ -1016,7 +1016,7 @@ machine(L1Cache, "Directory protocol")
     zz_recycleMandatoryQueue;
   }
 
-  transition({M_W, MM_W}, {Fwd_GETS, Fwd_DMA, Fwd_GETX, Own_GETX, Inv}) {
+  transition({M_W, MM_W, SM_M, IM_M, OM_M}, {Fwd_GETS, Fwd_DMA, Fwd_GETX, Own_GETX, Inv}) {
     z_recycleRequestQueue;
   }
 
@@ -1407,6 +1407,16 @@ machine(L1Cache, "Directory protocol")
     //ms_setNumberOfMessagestozero;
     hx_load_hit;
     gs_sendUnblock;
+    s_deallocateTBE;
+    n_popResponseQueue;
+  }
+
+  transition(IS_N, Exclusive_Data, M_W) {
+    u_writeDataToCache;
+    m_decrementNumberOfMessages;
+    hx_load_hit;
+    gg_sendUnblockExclusive;
+    o_scheduleUseTimeout;
     s_deallocateTBE;
     n_popResponseQueue;
   }
