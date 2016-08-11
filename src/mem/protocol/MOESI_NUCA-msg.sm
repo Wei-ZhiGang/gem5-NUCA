@@ -100,6 +100,7 @@ structure(RequestMsg, desc="...", interface="NetworkMessage") {
   MessageSizeType MessageSize, desc="size category of the message";
   RubyAccessMode AccessMode,    desc="user/supervisor access type";
   PrefetchBit Prefetch,         desc="Is this a prefetch request";
+  MachineID MidRequestor,            desc="Node who should be unblock";
 
   bool functionalRead(Packet *pkt) {
     // Read only those messages that contain the data
@@ -127,6 +128,7 @@ structure(ResponseMsg, desc="...", interface="NetworkMessage") {
   bool Dirty,                  desc="Is the data dirty (different than memory)?";
   int Acks,                    desc="How many acks to expect";
   MessageSizeType MessageSize, desc="size category of the message";
+  MachineID MidSender,               desc="Node who sent the data to L1 from another L1 Cache";
 
   bool functionalRead(Packet *pkt) {
     // Read only those messages that contain the data

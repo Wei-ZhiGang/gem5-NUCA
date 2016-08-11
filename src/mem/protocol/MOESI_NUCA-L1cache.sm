@@ -600,6 +600,7 @@ machine(L1Cache, "Directory protocol")
           out_msg.Dirty := false;
           out_msg.Acks := in_msg.Acks;
           out_msg.MessageSize := MessageSizeType:ResponseLocal_Data;
+          out_msg.MidSender := in_msg.MidRequestor;
         }
         DPRINTF(RubySlicc, "Sending data to L1\n");
       }
@@ -650,6 +651,7 @@ machine(L1Cache, "Directory protocol")
           out_msg.Dirty := cache_entry.Dirty;
           out_msg.Acks := in_msg.Acks;
           out_msg.MessageSize := MessageSizeType:ResponseLocal_Data;
+          out_msg.MidSender := in_msg.MidRequestor;
         }
         DPRINTF(RubySlicc, "Sending exclusive data to L1\n");
       }
@@ -709,6 +711,31 @@ machine(L1Cache, "Directory protocol")
     }
   }
 
+  action(gsm_sendUnblock, "gsm", desc="Send unblock to MidSender, for Data") {
+    peek(responseToL1Cache_in, ResponseMsg) {
+    if (in_msg.SenderMachine  == MachineType:L1Cache) {
+        enqueue(responseNetwork_out, ResponseMsg, request_latency) {
+          out_msg.Addr := address;
+          out_msg.Type := CoherenceResponseType:UNBLOCK;
+          out_msg.Sender := machineID;
+          out_msg.SenderMachine := MachineType:L1Cache;
+          out_msg.Destination.add(in_msg.MidSender);
+          out_msg.MessageSize := MessageSizeType:Unblock_Control;
+        }
+      }
+      else {
+        enqueue(responseNetwork_out, ResponseMsg, request_latency) {
+          out_msg.Addr := address;
+          out_msg.Type := CoherenceResponseType:UNBLOCK;
+          out_msg.Sender := machineID;
+          out_msg.SenderMachine := MachineType:L1Cache;
+          out_msg.Destination.add(in_msg.Sender);
+          out_msg.MessageSize := MessageSizeType:Unblock_Control;
+        }
+      }
+    }
+  }
+
   action(gg_sendUnblockExclusive, "\g", desc="Send unblock exclusive to memory") {
     enqueue(responseNetwork_out, ResponseMsg, request_latency) {
       out_msg.Addr := address;
@@ -717,6 +744,31 @@ machine(L1Cache, "Directory protocol")
       out_msg.SenderMachine := MachineType:L1Cache;
       out_msg.Destination.addNetDest(multicast(machineID, MachineType:L1Cache, MachineType:L2Cache));
       out_msg.MessageSize := MessageSizeType:Unblock_Control;
+    }
+  }
+
+  action(ggm_sendUnblockExclusive, "\gm", desc="Send unblock exclusive to midnode L2") {
+    peek(responseToL1Cache_in, ResponseMsg) {
+      if (in_msg.SenderMachine  == MachineType:L1Cache) {
+        enqueue(responseNetwork_out, ResponseMsg, request_latency) {
+          out_msg.Addr := address;
+          out_msg.Type := CoherenceResponseType:UNBLOCK_EXCLUSIVE;
+          out_msg.Sender := machineID;
+          out_msg.SenderMachine := MachineType:L1Cache;
+          out_msg.Destination.add(in_msg.MidSender);
+          out_msg.MessageSize := MessageSizeType:Unblock_Control;
+        }
+      }
+      else {
+        enqueue(responseNetwork_out, ResponseMsg, request_latency) {
+          out_msg.Addr := address;
+          out_msg.Type := CoherenceResponseType:UNBLOCK_EXCLUSIVE;
+          out_msg.Sender := machineID;
+          out_msg.SenderMachine := MachineType:L1Cache;
+          out_msg.Destination.add(in_msg.Sender);
+          out_msg.MessageSize := MessageSizeType:Unblock_Control;
+        }
+      }
     }
   }
 
@@ -1406,7 +1458,7 @@ machine(L1Cache, "Directory protocol")
     m_decrementNumberOfMessages;
     //ms_setNumberOfMessagestozero;
     hx_load_hit;
-    gs_sendUnblock;
+    gsm_sendUnblock;
     s_deallocateTBE;
     n_popResponseQueue;
   }
@@ -1415,7 +1467,7 @@ machine(L1Cache, "Directory protocol")
     u_writeDataToCache;
     m_decrementNumberOfMessages;
     hx_load_hit;
-    gg_sendUnblockExclusive;
+    ggm_sendUnblockExclusive;
     o_scheduleUseTimeout;
     s_deallocateTBE;
     n_popResponseQueue;
@@ -1427,7 +1479,7 @@ machine(L1Cache, "Directory protocol")
     //m_decrementNumberOfMessages;
     ms_setNumberOfMessagestozero;
     hx_load_hit;
-    gs_sendUnblock;
+    gsm_sendUnblock;
     s_deallocateTBE;
     n_popResponseQueue;
   }
@@ -1436,7 +1488,7 @@ machine(L1Cache, "Directory protocol")
     u_writeDataToCache;
     m_decrementNumberOfMessages;
     hx_load_hit;
-    gg_sendUnblockExclusive;
+    ggm_sendUnblockExclusive;
     o_scheduleUseTimeout;
     s_deallocateTBE;
     n_popResponseQueue;

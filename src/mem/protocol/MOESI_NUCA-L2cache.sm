@@ -1291,6 +1291,7 @@ machine(L2Cache, "Token protocol")
         // should randomize this so one node doesn't get abused more than others
         out_msg.Destination.add(localDirectory[in_msg.Addr].Sharers.smallestElement(MachineType:L1Cache));
         out_msg.MessageSize := MessageSizeType:Forwarded_Control;
+        out_msg.MidRequestor := machineID;
       }
     }
   }
@@ -1305,6 +1306,7 @@ machine(L2Cache, "Token protocol")
       out_msg.Destination.add(localDirectory[address].Owner);
       out_msg.MessageSize := MessageSizeType:Forwarded_Control;
       out_msg.Acks := 1 + tbe.Local_GETX_IntAcks;
+      out_msg.MidRequestor := machineID;
     }
   }
 
@@ -1319,6 +1321,7 @@ machine(L2Cache, "Token protocol")
         out_msg.Destination.add(getLocalOwner(cache_entry, in_msg.Addr));
         out_msg.MessageSize := MessageSizeType:Forwarded_Control;
         out_msg.Acks := 1;
+        out_msg.MidRequestor := machineID;
       }
     }
   }
@@ -1332,6 +1335,7 @@ machine(L2Cache, "Token protocol")
         out_msg.RequestorMachine := MachineType:L1Cache;
         out_msg.Destination.add(getLocalOwner(cache_entry, in_msg.Addr));
         out_msg.MessageSize := MessageSizeType:Forwarded_Control;
+        out_msg.MidRequestor := machineID;
       }
     }
   }
@@ -2091,7 +2095,7 @@ machine(L2Cache, "Token protocol")
     //a_issueGETS;
     e_sendNackToL1Requestor;
     //uu_profileMiss;
-	s_deallocateTBE;
+	  s_deallocateTBE;
     o_popL1RequestQueue;
   }
 
