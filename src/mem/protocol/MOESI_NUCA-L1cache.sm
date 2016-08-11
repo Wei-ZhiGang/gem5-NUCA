@@ -1503,7 +1503,7 @@ machine(L1Cache, "Directory protocol")
     // FIXME: This might cause deadlock by re-using the writeback
     // channel, we should handle this case differently.
     dd_issuePUTO;
-    l_popForwardQueue;
+    j_popTriggerQueue;
   }
 
   transition({SI, MI, OI}, Writeback_Nack) {
@@ -1520,20 +1520,27 @@ machine(L1Cache, "Directory protocol")
   
   // Transitions from II
   transition(II, {Writeback_Ack, Writeback_Ack_Data}, I) {
+    ms_setNumberOfMessagestozero;
     g_sendUnblock;
     s_deallocateTBE;
     l_popForwardQueue;
   }
 
   // transition({II, SI}, Writeback_Nack, I) {
-  transition(II, Writeback_Nack, I) {
-    s_deallocateTBE;
+  transition(II, Writeback_Nack) {
+    m_decrementNumberOfMessages;
+    on_checkForCompletion;
     l_popForwardQueue;
+  }
+  transition(II, All_nacks, I) {
+    s_deallocateTBE;
+    j_popTriggerQueue;
   }
 
   transition(II, Inv) {
-    f_sendAck;
-    l_popForwardQueue;
+    //f_sendAck;
+    //l_popForwardQueue;
+    z_recycleRequestQueue;
   }
 
   transition(SI, Inv, II) {
