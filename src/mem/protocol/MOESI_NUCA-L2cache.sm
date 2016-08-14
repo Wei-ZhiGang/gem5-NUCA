@@ -1045,7 +1045,7 @@ machine(L2Cache, "Token protocol")
     enqueue(responseNetwork_out, ResponseMsg, response_latency) {
       assert(is_valid(tbe));
       out_msg.Addr := address;
-      out_msg.Type := CoherenceResponseType:ACK;
+      out_msg.Type := CoherenceResponseType:NACK;
       out_msg.Sender := machineID;
       out_msg.SenderMachine := MachineType:L2Cache;
       out_msg.Destination.add(tbe.L1_GetX_ID);
@@ -2095,7 +2095,7 @@ machine(L2Cache, "Token protocol")
     //a_issueGETS;
     e_sendNackToL1Requestor;
     //uu_profileMiss;
-	  s_deallocateTBE;
+    s_deallocateTBE;
     o_popL1RequestQueue;
   }
 
@@ -2108,7 +2108,7 @@ machine(L2Cache, "Token protocol")
   }
 
   transition({NP, I}, L1_GETX, IGM) {
-    //i_allocateTBE;
+    i_allocateTBE;
     s_recordGetXL1ID;
     a_issueGETX;
     uu_profileMiss;
@@ -2117,18 +2117,20 @@ machine(L2Cache, "Token protocol")
   
   // Wei added. --------------------
   transition({NP, I}, L1_GETX_M) {
-	  i_allocateTBE;
+    i_allocateTBE;
     s_recordGetXL1ID;
     e_sendNackToL1RequestorFromTBE;
     //uu_profileMiss;
-	  s_deallocateTBE;
+    s_deallocateTBE;
     o_popL1RequestQueue;
   }
 
   transition({ILS, ILOS, OLS, ILO, SLS, S, O, M, OLSX, ILX, ILOX, ILOSX}, L1_GETX_M) {
+    i_allocateTBE;
     s_recordGetXL1ID;
     e_sendAckToL1RequestorFromTBE;
     //uu_profileMiss;
+    s_deallocateTBE;
     o_popL1RequestQueue;
   }
   // -------------------------------

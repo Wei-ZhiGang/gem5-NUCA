@@ -445,7 +445,7 @@ machine(L1Cache, "Directory protocol")
   action(a_issueGETS, "a", desc="Issue GETS") {
     peek(mandatoryQueue_in, RubyRequest) {
       assert(is_valid(tbe));
-      tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
+      tbe.NumPendingMsgs := 0 - countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
       tbe.AccessMode := in_msg.AccessMode;
       tbe.Prefetch := in_msg.Prefetch;
       enqueue(requestNetwork_out, RequestMsg,  request_latency) {
@@ -482,7 +482,7 @@ machine(L1Cache, "Directory protocol")
   }
 
   action(b_issueGETX, "b", desc="Issue GETX") {
-	peek(mandatoryQueue_in, RubyRequest) {
+	//peek(triggerQueue_in, TriggerMsg) {
       assert(is_valid(tbe));
       enqueue(requestNetwork_out, RequestMsg, request_latency) {
         out_msg.Addr := address;
@@ -494,13 +494,13 @@ machine(L1Cache, "Directory protocol")
         out_msg.AccessMode := tbe.AccessMode;
         out_msg.Prefetch := tbe.Prefetch;
       }
-    }
+    //}
   }
 
   action(b_issueGETXM, "bm", desc="Issue GETX_M") {
     peek(mandatoryQueue_in, RubyRequest) {
       assert(is_valid(tbe));
-      tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
+      tbe.NumPendingMsgs := 0 - countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
       tbe.AccessMode := in_msg.AccessMode;
       tbe.Prefetch := in_msg.Prefetch;
       enqueue(requestNetwork_out, RequestMsg, request_latency) {
@@ -533,7 +533,7 @@ machine(L1Cache, "Directory protocol")
 
   action(d_issuePUTX, "d", desc="Issue PUTX") {
     assert(is_valid(tbe));
-    tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
+    tbe.NumPendingMsgs := 0 - countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
     enqueue(requestNetwork_out, RequestMsg, request_latency) {
       out_msg.Addr := address;
       out_msg.Type := CoherenceRequestType:PUTX;
@@ -546,7 +546,7 @@ machine(L1Cache, "Directory protocol")
 
   action(dd_issuePUTO, "\d", desc="Issue PUTO") {
     assert(is_valid(tbe));
-    tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
+    tbe.NumPendingMsgs := 0 - countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
     enqueue(requestNetwork_out, RequestMsg, request_latency) {
       out_msg.Addr := address;
       out_msg.Type := CoherenceRequestType:PUTO;
@@ -559,7 +559,7 @@ machine(L1Cache, "Directory protocol")
 
   action(dd_issuePUTS, "\ds", desc="Issue PUTS") {
     assert(is_valid(tbe));
-    tbe.NumPendingMsgs := countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
+    tbe.NumPendingMsgs := 0 - countSetbanks(MachineType:L1Cache, MachineType:L2Cache);
     enqueue(requestNetwork_out, RequestMsg, request_latency) {
       out_msg.Addr := address;
       out_msg.Type := CoherenceRequestType:PUTS;
@@ -1206,7 +1206,7 @@ machine(L1Cache, "Directory protocol")
   }
 
   // Wei added
-  transition(S, Nack) {
+  transition({S, M_W}, Nack) {
     //ms_setNumberOfMessagestozero;
     n_popResponseQueue;
   }
